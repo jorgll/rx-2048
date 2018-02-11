@@ -1,4 +1,8 @@
-# RXPHelloWorld
+# RX-2048
+
+ReactXP-based 2048 clone. Port of previous Angular-based 2048 clone.
+
+### Autogen documentation
 
 This app works on React Native (iOS, Android) and web. Most of the app's code is contained in `App.tsx`.
 
