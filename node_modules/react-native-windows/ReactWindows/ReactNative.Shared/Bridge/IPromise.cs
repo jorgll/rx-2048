@@ -1,0 +1,70 @@
+using Newtonsoft.Json.Linq;
+using System;
+
+namespace ReactNative.Bridge
+{
+    /// <summary>
+    /// Interface that represents a JavaScript Promise which can be passed to 
+    /// the native module as a method parameter.
+    /// </summary>
+    /// <remarks>
+    /// Methods annotated with <see cref="ReactMethodAttribute"/> that use 
+    /// <see cref="IPromise"/> as type of the last parameter will be marked as
+    /// "remoteAsync" and will return a promise when invoked from JavaScript.
+    /// </remarks>
+    public interface IPromise
+    {
+        /// <summary>
+        /// Resolve the promise with the given value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        void Resolve(object value);
+
+        /// <summary>
+        /// Report an error which wasn't caused by an exception.
+        /// </summary>
+        /// <param name="code">The error code.</param>
+        /// <param name="message">The error message.</param>
+        void Reject(string code, string message);
+
+        /// <summary>
+        /// Report an exception.
+        /// </summary>
+        /// <param name="code">The error code.</param>
+        /// <param name="exception">The exception.</param>
+        void Reject(string code, Exception exception);
+
+        /// <summary>
+        /// Report an exception with a custom error message.
+        /// </summary>
+        /// <param name="code">The error code.</param>
+        /// <param name="message">The error message.</param>
+        /// <param name="exception">The exception.</param>
+        void Reject(string code, string message, Exception exception);
+
+        /// <summary>
+        /// Report an error which wasn't caused by an exception.
+        /// </summary>
+        /// <param name="message">The error message.</param>
+        /// <remarks>
+        /// Using this method will pass the error code "EUNSPECIFIED".
+        /// </remarks>
+        [Obsolete("Prefer passing a module-specific error code to JavaScript.")]
+        void Reject(string message);
+
+        /// <summary>
+        /// Reject the promise with the given exception.
+        /// </summary>
+        /// <param name="exception">The exception.</param>
+        void Reject(Exception exception);
+
+        /// <summary>
+        /// Report an error by explicitly specifying all of the fields of the error.
+        /// </summary>
+        /// <param name="code">The error code.</param>
+        /// <param name="message">The error message.</param>
+        /// <param name="stack">A string representing the frames on the call stack. Usually you get this off of an Exception object.</param>
+        /// <param name="userInfo">User-defined information about the error. This is usually a collection of key-value pairs that provides additional error details.</param>
+        void Reject(string code, string message, string stack, JToken userInfo);
+    }
+}
