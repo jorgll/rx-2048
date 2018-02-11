@@ -8,22 +8,22 @@ const styles = {
     backgroundColor: "#f5fcff"
   }),
   container: RX.Styles.createViewStyle({
-    padding: 16,
+    padding: 8,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 50
+    marginTop: 80
   }),
   gameTitle: RX.Styles.createTextStyle({
-    fontSize: 36,
+    fontSize: 32,
     fontWeight: "bold",
-    marginBottom: 28
+    marginBottom: 16
   }),
   gameContainer: RX.Styles.createViewStyle({
     marginTop: 40,
-    padding: 15,
-    borderRadius: 6,
-    width: 500,
-    height: 515,
+    padding: 9,
+    borderRadius: 3,
+    width: 300,
+    height: 310,
     backgroundColor: "#bbada0"
   }),
   gridContainer: RX.Styles.createViewStyle({
@@ -31,28 +31,28 @@ const styles = {
   }),
   gridRowContainer: RX.Styles.createViewStyle({
     flexDirection: "row",
-    marginBottom: 15
+    marginBottom: 9
   }),
   gridCellContainer: RX.Styles.createViewStyle({
-    width: 106.25,
-    height: 106.25,
-    marginRight: 15,
-    borderRadius: 3,
+    width: 63.75,
+    height: 63.75,
+    marginRight: 9,
+    borderRadius: 1.8,
     backgroundColor: "rgba(238, 228, 218, 0.35)"
   }),
   tileContainer: RX.Styles.createViewStyle({
-    width: 107,
-    height: 107,
+    width: 64.2,
+    height: 64.2,
     justifyContent: "center"
   }),
   tileTextContainer: RX.Styles.createTextStyle({
     flexGrow: 1,
     textAlign: "center",
-    paddingTop: 25,
-    borderRadius: 3,
+    paddingTop: 15,
+    borderRadius: 1.8,
     backgroundColor: "#eee4da",
     fontWeight: "bold",
-    fontSize: 55
+    fontSize: 40
   })
 };
 
