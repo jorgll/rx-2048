@@ -42,12 +42,12 @@ node_modules
 /src/obj
 /dist
 
-
 # Miscellaneous user files
 *.user
 .vscode
 .DS_STORE
 
-
 .idea/*
 .vs
+.vscode/*
+.react/*

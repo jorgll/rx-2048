@@ -11,7 +11,7 @@
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios"
   },
   "devDependencies": {
-    "@types/node": "^7.0.12",
+    "@types/node": "^7.0.55",
     "@types/webpack": "^2.2.14",
     "awesome-typescript-loader": "3.1.2",
     "source-map-loader": "^0.1.6",
@@ -22,11 +22,12 @@
   "dependencies": {
     "react": "16.2.0",
     "react-dom": "16.2.0",
-    "react-native": "^0.51.0",
-    "react-native-windows": "^0.51.0-rc.1",
-    "reactxp": "^0.51.0",
+    "react-native": "^0.51.1",
+    "react-native-windows": "^0.51.0-rc.4",
+    "reactxp": "^0.51.9",
     "reactxp-imagesvg": "^0.2.8",
     "reactxp-navigation": "^1.0.15",
-    "reactxp-video": "^0.2.3"
+    "reactxp-video": "^0.2.3",
+    "tslint": "^5.9.1"
   }
 }
