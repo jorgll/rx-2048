@@ -1,9 +1,19 @@
 import RX = require("reactxp");
+import Tile = require("./Tile");
 
 interface GameBoardProps {}
+interface GameState {
+  board: number[][];
+}
 
 const styles = {
-  gridContainer: RX.Styles.createViewStyle({
+  gameContainer: RX.Styles.createViewStyle({
+    marginTop: 40,
+    padding: 9,
+    borderRadius: 3,
+    width: 300,
+    height: 310,
+    backgroundColor: "#bbada0",
     flexWrap: "wrap"
   }),
   gridRowContainer: RX.Styles.createViewStyle({
@@ -16,48 +26,34 @@ const styles = {
     marginRight: 9,
     borderRadius: 1.8,
     backgroundColor: "rgba(238, 228, 218, 0.35)"
-  }),
-  tileContainer: RX.Styles.createViewStyle({
-    width: 64.2,
-    height: 64.2,
-    justifyContent: "center"
-  }),
-  tileTextContainer: RX.Styles.createTextStyle({
-    flexGrow: 1,
-    textAlign: "center",
-    paddingTop: 15,
-    borderRadius: 1.8,
-    backgroundColor: "#eee4da",
-    fontWeight: "bold",
-    fontSize: 40
   })
 };
 
-class GameBoard extends RX.Component<GameBoardProps, null> {
-  private _board: number[][];
-
+class GameBoard extends RX.Component<GameBoardProps, GameState> {
   constructor(props: GameBoardProps) {
     super(props);
-
-    this._board = [[0, 2, 0, 0], [0, 0, 0, 0], [2, 0, 0, 0], [0, 0, 0, 2]];
+    this.state = {
+      board: [
+        [0, 2, 4, 8],
+        [16, 32, 64, 128],
+        [256, 512, 1024, 2048],
+        [0, 0, 0, 0]
+      ]
+    };
   }
 
   componentDidMount() {}
 
   render() {
     return (
-      <RX.View style={styles.gridContainer}>
-        {this._board.map(row => {
+      <RX.View style={styles.gameContainer}>
+        {this.state.board.map(row => {
           return (
             <RX.View style={styles.gridRowContainer}>
               {row.map(tile => {
                 return (
                   <RX.View style={styles.gridCellContainer}>
-                    <RX.GestureView style={styles.tileContainer}>
-                      <RX.Text style={styles.tileTextContainer}>
-                        {tile !== 0 && tile}
-                      </RX.Text>
-                    </RX.GestureView>
+                    <Tile value={tile} row={1} column={2} merged={false} />
                   </RX.View>
                 );
               })}

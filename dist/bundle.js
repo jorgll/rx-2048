@@ -9606,20 +9606,12 @@ var styles = {
         fontSize: 32,
         fontWeight: "bold",
         marginBottom: 16
-    }),
-    gameContainer: RX.Styles.createViewStyle({
-        marginTop: 40,
-        padding: 9,
-        borderRadius: 3,
-        width: 300,
-        height: 310,
-        backgroundColor: "#bbada0"
     })
 };
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
-    function App() {
-        var _this = _super.call(this, null) || this;
+    function App(props) {
+        var _this = _super.call(this, props) || this;
         _this._translationValue = RX.Animated.createValue(-100);
         _this._animatedStyle = RX.Styles.createAnimatedTextStyle({
             transform: [
@@ -9666,8 +9658,15 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var RX = __webpack_require__(53);
+var Tile = __webpack_require__(343);
 var styles = {
-    gridContainer: RX.Styles.createViewStyle({
+    gameContainer: RX.Styles.createViewStyle({
+        marginTop: 40,
+        padding: 9,
+        borderRadius: 3,
+        width: 300,
+        height: 310,
+        backgroundColor: "#bbada0",
         flexWrap: "wrap"
     }),
     gridRowContainer: RX.Styles.createViewStyle({
@@ -9680,36 +9679,28 @@ var styles = {
         marginRight: 9,
         borderRadius: 1.8,
         backgroundColor: "rgba(238, 228, 218, 0.35)"
-    }),
-    tileContainer: RX.Styles.createViewStyle({
-        width: 64.2,
-        height: 64.2,
-        justifyContent: "center"
-    }),
-    tileTextContainer: RX.Styles.createTextStyle({
-        flexGrow: 1,
-        textAlign: "center",
-        paddingTop: 15,
-        borderRadius: 1.8,
-        backgroundColor: "#eee4da",
-        fontWeight: "bold",
-        fontSize: 40
     })
 };
 var GameBoard = /** @class */ (function (_super) {
     __extends(GameBoard, _super);
     function GameBoard(props) {
         var _this = _super.call(this, props) || this;
-        _this._board = [[0, 2, 0, 0], [0, 0, 0, 0], [2, 0, 0, 0], [0, 0, 0, 2]];
+        _this.state = {
+            board: [
+                [0, 2, 4, 8],
+                [16, 32, 64, 128],
+                [256, 512, 1024, 2048],
+                [0, 0, 0, 0]
+            ]
+        };
         return _this;
     }
     GameBoard.prototype.componentDidMount = function () { };
     GameBoard.prototype.render = function () {
-        return (RX.createElement(RX.View, { style: styles.gridContainer }, this._board.map(function (row) {
+        return (RX.createElement(RX.View, { style: styles.gameContainer }, this.state.board.map(function (row) {
             return (RX.createElement(RX.View, { style: styles.gridRowContainer }, row.map(function (tile) {
                 return (RX.createElement(RX.View, { style: styles.gridCellContainer },
-                    RX.createElement(RX.GestureView, { style: styles.tileContainer },
-                        RX.createElement(RX.Text, { style: styles.tileTextContainer }, tile !== 0 && tile))));
+                    RX.createElement(Tile, { value: tile, row: 1, column: 2, merged: false })));
             })));
         })));
     };
@@ -38829,6 +38820,186 @@ var RX = __webpack_require__(53);
 var App = __webpack_require__(145);
 RX.App.initialize(true, true);
 RX.UserInterface.setMainView(RX.createElement(App, null));
+
+
+/***/ }),
+/* 343 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var RX = __webpack_require__(53);
+var styles = {
+    tileContainer: RX.Styles.createViewStyle({
+        width: 64.2,
+        height: 64.2,
+        justifyContent: "center",
+        flexGrow: 1,
+        borderRadius: 1.8
+    }),
+    tile2: RX.Styles.createTextStyle({
+        flexGrow: 1,
+        paddingTop: 7,
+        backgroundColor: "#eee4da",
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 40
+    }),
+    tile4: RX.Styles.createTextStyle({
+        flexGrow: 1,
+        paddingTop: 7,
+        backgroundColor: "#eee1c9",
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 40
+    }),
+    tile8: RX.Styles.createTextStyle({
+        flexGrow: 1,
+        paddingTop: 7,
+        color: "#f9f6f2",
+        backgroundColor: "#f3b27a",
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 40
+    }),
+    tile16: RX.Styles.createTextStyle({
+        flexGrow: 1,
+        paddingTop: 7,
+        color: "#f9f6f2",
+        backgroundColor: "#f69664",
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 40
+    }),
+    tile32: RX.Styles.createTextStyle({
+        flexGrow: 1,
+        paddingTop: 7,
+        color: "#f9f6f2",
+        backgroundColor: "#f77c5f",
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 40
+    }),
+    tile64: RX.Styles.createTextStyle({
+        flexGrow: 1,
+        paddingTop: 7,
+        color: "#f9f6f2",
+        backgroundColor: "#f75f3b",
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 40
+    }),
+    tile128: RX.Styles.createTextStyle({
+        flexGrow: 1,
+        paddingTop: 14,
+        color: "#f9f6f2",
+        backgroundColor: "#edd073",
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 30
+    }),
+    tile256: RX.Styles.createTextStyle({
+        flexGrow: 1,
+        paddingTop: 14,
+        color: "#f9f6f2",
+        backgroundColor: "#edcc62",
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 30
+    }),
+    tile512: RX.Styles.createTextStyle({
+        flexGrow: 1,
+        paddingTop: 14,
+        color: "#f9f6f2",
+        backgroundColor: "#edc950",
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 30
+    }),
+    tile1024: RX.Styles.createTextStyle({
+        flexGrow: 1,
+        paddingTop: 18,
+        color: "#f9f6f2",
+        backgroundColor: "#edc53f",
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 25
+    }),
+    tile2048: RX.Styles.createTextStyle({
+        flexGrow: 1,
+        paddingTop: 18,
+        color: "#f9f6f2",
+        backgroundColor: "#edc22e",
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 25
+    })
+};
+var Tile = /** @class */ (function (_super) {
+    __extends(Tile, _super);
+    function Tile(props) {
+        return _super.call(this, props) || this;
+    }
+    Tile.prototype.componentDidMount = function () { };
+    Tile.prototype.render = function () {
+        return (RX.createElement(RX.GestureView, { style: styles.tileContainer },
+            RX.createElement(RX.Text, { style: this.getTileStyle() }, this.props.value !== 0 && this.props.value)));
+    };
+    Tile.prototype.getTileStyle = function () {
+        var style = null;
+        switch (this.props.value) {
+            case 2:
+                style = styles.tile2;
+                break;
+            case 4:
+                style = styles.tile4;
+                break;
+            case 8:
+                style = styles.tile8;
+                break;
+            case 16:
+                style = styles.tile16;
+                break;
+            case 32:
+                style = styles.tile32;
+                break;
+            case 64:
+                style = styles.tile64;
+                break;
+            case 128:
+                style = styles.tile128;
+                break;
+            case 256:
+                style = styles.tile256;
+                break;
+            case 512:
+                style = styles.tile512;
+                break;
+            case 1024:
+                style = styles.tile1024;
+                break;
+            case 2048:
+                style = styles.tile2048;
+                break;
+            default:
+                style = styles.tile2;
+                break;
+        }
+        return style;
+    };
+    return Tile;
+}(RX.Component));
+module.exports = Tile;
 
 
 /***/ })
