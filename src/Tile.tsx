@@ -5,6 +5,7 @@ interface TileProps {
   column: number;
   value: number;
   merged: boolean;
+  id: number;
 }
 
 const styles = {
