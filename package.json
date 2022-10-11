@@ -22,7 +22,7 @@
   "dependencies": {
     "react": "16.2.0",
     "react-dom": "16.2.0",
-    "react-native": "^0.57.2",
+    "react-native": "^0.70.2",
     "react-native-windows": "^1.0.0",
     "reactxp": "^0.51.9",
     "reactxp-imagesvg": "^0.2.8",
